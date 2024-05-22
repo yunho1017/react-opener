@@ -8,8 +8,8 @@ const genId = (() => {
   };
 })();
 
-export const createOpenerStore = <TItemState = any>() =>
-  createStore<StoreState<TItemState>>((set) => ({
+export const createOpenerStore = <TItemState = any>() => {
+  const store = createStore<StoreState<TItemState>>((set) => ({
     items: [],
     add: (item) => {
       const id = genId();
@@ -18,7 +18,7 @@ export const createOpenerStore = <TItemState = any>() =>
         items: [
           ...state.items,
           {
-            ...(Object.hasOwn(item, "element") ? item : { element: item }),
+            ...(item.hasOwnProperty("element") ? item : { element: item }),
             id,
           } as Item<TItemState>,
         ],
@@ -41,3 +41,11 @@ export const createOpenerStore = <TItemState = any>() =>
       });
     },
   }));
+
+  return {
+    ...store,
+    open: (item: Item<TItemState>) => {
+      return store.getState().add(item);
+    },
+  };
+};
