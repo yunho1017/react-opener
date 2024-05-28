@@ -1,15 +1,15 @@
 import React from "react";
-import { createStore } from "./store";
-import { StoreState } from "./types";
 
-export const ReactOpener = <T extends StoreState<any>>({
+import { createOpenerStore } from "./store";
+
+export const ReactOpener = ({
   store,
 }: {
-  store: ReturnType<typeof createStore<T>>;
+  store: ReturnType<typeof createOpenerStore>;
 }) => {
   const { items, remove } = store.useStore((state) => ({
     items: state.items,
-    remove: state.remove,
+    remove: state.close,
   }));
 
   return (

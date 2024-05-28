@@ -1,4 +1,4 @@
-import { createOpenerStore } from "./opener";
+import { createOpenerStore } from "./store";
 import { ReactOpener as _ReactOpener } from "./renderer";
 
 type CompoundedComponent = typeof _ReactOpener & {

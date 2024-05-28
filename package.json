@@ -1,20 +1,54 @@
 {
   "name": "react-opener",
+  "version": "0.1.4",
+  "description": "render React Component from anywhere",
+  "author": "Yunho Seo",
   "license": "MIT",
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "version": "0.1.2",
-  "dependencies": {
-    "react": "^18.3.1",
-    "use-sync-external-store": "^1.2.2"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yunho1017/react-opener.git"
   },
+  "keywords": [
+    "react",
+    "message",
+    "snackbar"
+  ],
+  "import": "./esm/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./esm/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./esm/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@types/react": ">=16.8",
+    "react": ">=16.8"
+  },
+  "files": [
+    "dist",
+    "esm"
+  ],
   "scripts": {
-    "build": "rm -rf dist && mkdir dist && tsc"
+    "build": "rm -rf dist esm && tsc -p tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist && rollup -c rollup.config.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "@babel/preset-react": "^7.24.6",
+    "@babel/preset-typescript": "^7.24.6",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/react": "^18.3.2",
     "@types/use-sync-external-store": "^0.0.6",
-    "typescript": "~5.4.5"
+    "rollup": "^4.18.0",
+    "typescript": "^5.4.5",
+    "use-sync-external-store": "1.2.0"
   }
 }

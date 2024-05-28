@@ -8,10 +8,10 @@ export type Item<S = Record<string, any>> = {
 
 export type StoreState<S = Record<string, any>> = {
   items: Item<S>[];
-  add: (item: Omit<Item<S>, "id"> | JSX.Element) => {
+  open: (item: Omit<Item<S>, "id"> | JSX.Element) => {
     remove: () => void;
     id: string;
   };
-  remove: (id: string) => void;
-  clearAll: () => void;
+  close: (id: string) => void;
+  closeAll: () => void;
 };

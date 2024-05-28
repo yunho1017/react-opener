@@ -1,20 +1,16 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment",
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "noImplicitAny": true,
-    "declaration": true,
-    "baseUrl": ".",
+    "target": "es6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "rootDir": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx"
   },
-  "include": ["src/**/*", "tests/**/*"]
+  "include": ["src"],
+  "exclude": ["dist", "esm"]
 }

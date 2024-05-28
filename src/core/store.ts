@@ -1,6 +1,4 @@
-import useSyncExternalStoreExports from "use-sync-external-store/shim/with-selector";
-
-const { useSyncExternalStoreWithSelector } = useSyncExternalStoreExports;
+import { useSyncExternalStoreWithSelector } from "use-sync-external-store/shim/with-selector";
 
 interface StoreApi<T> {
   setState: (partial: T | Partial<T> | ((state: T) => T | Partial<T>)) => void;
@@ -9,42 +7,42 @@ interface StoreApi<T> {
   getInitialState: () => T;
 }
 
-export function createStore<TState extends Record<string, any>>(
-  createState: (setState: StoreApi<TState>["setState"]) => TState
+export function createStore<State extends Record<string, any>>(
+  createState: (setState: StoreApi<State>["setState"]) => State
 ) {
-  type Listener = (state: TState, prevState: TState) => void;
-  let state: TState;
+  type Listener = (state: State, prevState: State) => void;
+  let state: State;
   const listeners: Set<Listener> = new Set();
-  const setState: StoreApi<TState>["setState"] = (partial) => {
+  const setState: StoreApi<State>["setState"] = (partial) => {
     const nextState = typeof partial === "function" ? partial(state) : partial;
     if (!Object.is(nextState, state)) {
       const previousState = state;
       state =
         typeof nextState !== "object" || nextState === null
-          ? (nextState as TState)
+          ? (nextState as State)
           : Object.assign({}, state, nextState);
       listeners.forEach((listener) => listener(state, previousState));
     }
   };
 
-  const getState: StoreApi<TState>["getState"] = () => state;
+  const getState: StoreApi<State>["getState"] = () => state;
 
-  const subscribe: StoreApi<TState>["subscribe"] = (listener) => {
+  const subscribe: StoreApi<State>["subscribe"] = (listener) => {
     listeners.add(listener);
     return () => listeners.delete(listener);
   };
-  const getInitialState: StoreApi<TState>["getInitialState"] = () =>
+  const getInitialState: StoreApi<State>["getInitialState"] = () =>
     initialState;
 
   const api = {
     setState,
     getState,
     subscribe,
-    useStore: <T = TState>(
-      selector: (state: TState) => T = (state: TState) => state as unknown as T
+    useStore: <T = State>(
+      selector: (state: State) => T = (state: State) => state as unknown as T
     ) => {
       return useSyncExternalStoreWithSelector<
-        TState,
+        State,
         ReturnType<typeof selector>
       >(subscribe, getState, getInitialState, selector);
     },
