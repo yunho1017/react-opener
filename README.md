@@ -3,13 +3,42 @@
 [![npm](https://img.shields.io/npm/v/react-opener)](https://www.npmjs.com/package/react-opener)
 [![size](https://img.shields.io/bundlephobia/minzip/react-opener)](https://bundlephobia.com/result?p=react-opener)
 
-use React Context with selector
+render React Component from anywhere!
 
 ## Introduction
 
-When the value of React Context changes, all components that use useContext are re-rendered. This causes unnecessary re-rendering.
+Previously in order to show Dialog in React, we had to write the code below
 
-Using this library, can solve this issue.
+```js
+const Component = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        open dialog
+      </button>
+
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      />
+    </div>
+  );
+};
+```
+
+The code above has Dialog-Related code throughout the Function Component.
+
+If components become complicated, readability becomes poor and maintenance becomes difficult.
+
+This library can show React Component from anywhere to solve this issues.
 
 ## Install
 
