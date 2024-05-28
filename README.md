@@ -55,7 +55,6 @@ yarn add react-opener react
 ## Usage
 
 ```javascript
-import { memo, useCallback, useMemo, useState } from "react";
 import { ReactOpener } from "react-opener";
 
 const MessageStore = ReactOpener.createStore();
