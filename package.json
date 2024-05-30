@@ -1,6 +1,6 @@
 {
   "name": "react-opener",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "render React Component from anywhere",
   "author": "Yunho Seo",
   "license": "MIT",
@@ -46,9 +46,7 @@
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/react": "^18.3.2",
-    "@types/use-sync-external-store": "^0.0.6",
     "rollup": "^4.18.0",
-    "typescript": "^5.4.5",
-    "use-sync-external-store": "1.2.0"
+    "typescript": "^5.4.5"
   }
 }

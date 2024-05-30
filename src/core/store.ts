@@ -1,4 +1,4 @@
-import { useSyncExternalStoreWithSelector } from "use-sync-external-store/shim/with-selector";
+import { useSyncExternalStore } from "react";
 
 interface StoreApi<T> {
   setState: (partial: T | Partial<T> | ((state: T) => T | Partial<T>)) => void;
@@ -41,10 +41,11 @@ export function createStore<State extends Record<string, any>>(
     useStore: <T = State>(
       selector: (state: State) => T = (state: State) => state as unknown as T
     ) => {
-      return useSyncExternalStoreWithSelector<
-        State,
-        ReturnType<typeof selector>
-      >(subscribe, getState, getInitialState, selector);
+      return useSyncExternalStore<ReturnType<typeof selector>>(
+        subscribe,
+        () => selector(getState()),
+        () => selector(getInitialState())
+      );
     },
   };
   const initialState = (state = createState(setState));
