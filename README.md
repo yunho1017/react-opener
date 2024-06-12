@@ -54,6 +54,8 @@ yarn add react-opener react
 
 ## Usage
 
+### Basic
+
 ```javascript
 import { ReactOpener } from "react-opener";
 
@@ -67,9 +69,7 @@ const Container = () => {
         type="button"
         onClick={() => {
           MessageStore.open({
-            element: ({ remove }) => (
-              <YourMessage open={true} onClose={remove} />
-            ),
+            element: ({ close }) => <YourMessage open={true} onClose={close} />,
           });
         }}
       >
@@ -79,9 +79,7 @@ const Container = () => {
         type="button"
         onClick={() => {
           DialogStore.open({
-            element: ({ remove }) => (
-              <YourDialog open={true} onClose={remove} />
-            ),
+            element: ({ close }) => <YourDialog open={true} onClose={close} />,
           });
         }}
       >
@@ -90,6 +88,32 @@ const Container = () => {
       // Rendered here !
       <ReactOpener store={MessageStore} />
       <ReactOpener store={DialogStore} />
+    </div>
+  );
+};
+```
+
+### useOpener
+
+```javascript
+import { ReactOpener } from "react-opener";
+
+const Container = () => {
+  const [dialog, opener] = ReactOpener.useOpener();
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => {
+          dialog.open({
+            element: ({ close }) => <YourDialog open={true} onClose={close} />,
+          });
+        }}
+      >
+        dialog
+      </button>
+      {opener}
     </div>
   );
 };

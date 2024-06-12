@@ -1,25 +1,29 @@
 import { createStore } from "../../core/store";
-import { StoreState } from "../../core/types";
-import { generateDefaultState } from "../../util";
+import { type StoreState } from "../types";
+import { generateDefaultState } from "../util";
+
+type Item = {
+  message: string;
+};
 
 interface Options {
   delay?: number; // default: 500
 }
-export const createMessageStore = <ItemState extends Record<string, any>>(
-  options: Options = {}
-) => {
+export const createMessageStore = (options: Options = {}) => {
   const { delay = 500 } = options;
-  return createStore<StoreState<ItemState>>((set) => {
-    const defaultState = generateDefaultState<ItemState>(set);
+  return createStore<StoreState<Item, Item | string>>((set) => {
+    const defaultState = generateDefaultState<Item, Item | string>(set);
     return {
       ...defaultState,
       open: (item) => {
-        const { id, remove } = defaultState.open(item);
+        const { id, close } = defaultState.open(
+          typeof item === "string" ? { message: item } : item
+        );
         setTimeout(() => {
-          remove();
+          close();
         }, delay);
         return {
-          remove,
+          close,
           id,
         };
       },

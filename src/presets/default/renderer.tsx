@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useSyncExternalStore } from "react";
 
 import { createOpenerStore } from "./store";
 
@@ -7,10 +7,11 @@ export const ReactOpener = ({
 }: {
   store: ReturnType<typeof createOpenerStore>;
 }) => {
-  const { items, remove } = store.useStore((state) => ({
-    items: state.items,
-    remove: state.close,
-  }));
+  const { items, close } = useSyncExternalStore(
+    store.subscribe,
+    store.getState,
+    store.getInitialState
+  );
 
   return (
     <>
@@ -19,7 +20,7 @@ export const ReactOpener = ({
           {typeof item.element === "function"
             ? item.element({
                 id: item.id,
-                remove: () => remove(item.id),
+                close: () => close(item.id),
                 state: item.state ?? {},
               })
             : item.element}

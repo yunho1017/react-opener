@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useSyncExternalStore } from "react";
+
 import { createMessageStore } from "./store";
 
 export const ReactMessageOpener = ({
@@ -6,23 +7,16 @@ export const ReactMessageOpener = ({
 }: {
   store: ReturnType<typeof createMessageStore>;
 }) => {
-  const { items, remove } = store.useStore((state) => ({
-    items: state.items,
-    remove: state.close,
-  }));
+  const { items, close } = useSyncExternalStore(
+    store.subscribe,
+    store.getState,
+    store.getInitialState
+  );
 
   return (
     <>
       {items.map((item) => (
-        <React.Fragment key={item.id}>
-          {typeof item.element === "function"
-            ? item.element({
-                id: item.id,
-                remove: () => remove(item.id),
-                state: item.state ?? {},
-              })
-            : item.element}
-        </React.Fragment>
+        <React.Fragment key={item.id}></React.Fragment>
       ))}
     </>
   );

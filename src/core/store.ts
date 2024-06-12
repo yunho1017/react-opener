@@ -1,5 +1,3 @@
-import { useSyncExternalStore } from "react";
-
 interface StoreApi<T> {
   setState: (partial: T | Partial<T> | ((state: T) => T | Partial<T>)) => void;
   getState: () => T;
@@ -38,16 +36,9 @@ export function createStore<State extends Record<string, any>>(
     setState,
     getState,
     subscribe,
-    useStore: <T = State>(
-      selector: (state: State) => T = (state: State) => state as unknown as T
-    ) => {
-      return useSyncExternalStore<ReturnType<typeof selector>>(
-        subscribe,
-        () => selector(getState()),
-        () => selector(getInitialState())
-      );
-    },
+    getInitialState,
   };
+
   const initialState = (state = createState(setState));
 
   return api;
