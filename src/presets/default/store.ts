@@ -3,26 +3,24 @@ import { createStore } from "../../core/store";
 import { type StoreState } from "../types";
 import { generateDefaultState } from "../util";
 
-type Item<T = Record<string, any>> = {
+type Item = {
   element:
     | React.ReactElement
-    | ((params: { state: T; id: string; close(): void }) => React.ReactElement);
-  state?: Record<string, any>;
+    | ((params: { id: string; close(): void }) => React.ReactElement);
 };
 
-export const createOpenerStore = <ItemState>() => {
-  const store = createStore<
-    StoreState<Item<ItemState>, Item<ItemState> | React.ReactElement>
-  >((set) => {
-    const defaultState = generateDefaultState<
-      Item<ItemState>,
-      Item<ItemState> | React.ReactElement
-    >(set);
+export const createOpenerStore = () => {
+  const store = createStore<StoreState<Item, Item | Item["element"]>>((set) => {
+    const defaultState = generateDefaultState<Item, Item | Item["element"]>(
+      set
+    );
     return {
       ...defaultState,
       open: (item) => {
         return defaultState.open(
-          isValidElement(item) ? { element: item } : item
+          isValidElement(item) || typeof item === "function"
+            ? ({ element: item } as Item)
+            : item
         );
       },
     };
@@ -30,7 +28,7 @@ export const createOpenerStore = <ItemState>() => {
 
   return {
     ...store,
-    open: (item: Item<ItemState> | React.ReactElement) => {
+    open: (item: Item | Item["element"]) => {
       return store.getState().open(item);
     },
   };

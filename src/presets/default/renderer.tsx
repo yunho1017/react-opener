@@ -21,7 +21,6 @@ export const ReactOpener = ({
             ? item.element({
                 id: item.id,
                 close: () => close(item.id),
-                state: item.state ?? {},
               })
             : item.element}
         </React.Fragment>

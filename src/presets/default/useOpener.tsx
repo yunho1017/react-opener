@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { createOpenerStore } from "./store";
-import { ReactOpener } from "./renderer";
+import { ReactOpener } from "./Renderer";
 
 export function useOpener() {
   const ref = useRef<ReturnType<typeof createOpenerStore>>();

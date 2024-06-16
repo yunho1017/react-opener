@@ -57,9 +57,9 @@ yarn add react-opener react
 ### Basic
 
 ```javascript
-import { ReactOpener } from "react-opener";
+import { ReactOpener, ReactToastOpener } from "react-opener";
 
-const MessageStore = ReactOpener.createStore();
+const ToastStore = ReactToastOpener.createStore();
 const DialogStore = ReactOpener.createStore();
 
 const Container = () => {
@@ -68,12 +68,10 @@ const Container = () => {
       <button
         type="button"
         onClick={() => {
-          MessageStore.open({
-            element: ({ close }) => <YourMessage open={true} onClose={close} />,
-          });
+          ToastStore.success("toast !");
         }}
       >
-        message
+        toast
       </button>
       <button
         type="button"
@@ -86,7 +84,7 @@ const Container = () => {
         dialog
       </button>
       // Rendered here !
-      <ReactOpener store={MessageStore} />
+      <ReactToastOpener store={ToastStore} />
       <ReactOpener store={DialogStore} />
     </div>
   );

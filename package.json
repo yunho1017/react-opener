@@ -1,6 +1,6 @@
 {
   "name": "react-opener",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "render React Component from anywhere",
   "author": "Yunho Seo",
   "license": "MIT",
@@ -10,8 +10,11 @@
   },
   "keywords": [
     "react",
-    "message",
-    "snackbar"
+    "notifications",
+    "toast",
+    "snackbar",
+    "dialog",
+    "modal"
   ],
   "import": "./esm/index.mjs",
   "main": "./dist/index.js",
@@ -25,7 +28,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "goober": "^2.1.14"
+  },
   "peerDependencies": {
     "@types/react": ">=16.8",
     "react": ">=16.8"
