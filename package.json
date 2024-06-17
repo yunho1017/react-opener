@@ -1,6 +1,6 @@
 {
   "name": "react-opener",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "description": "render React Component from anywhere",
   "author": "Yunho Seo",
   "license": "MIT",
@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/yunho1017/react-opener.git"
   },
+  "homepage": "https://react-opener.vercel.app/",
   "keywords": [
     "react",
     "notifications",

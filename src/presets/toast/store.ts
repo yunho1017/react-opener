@@ -15,7 +15,7 @@ export type ToastIconType =
   | "warning"
   | React.ReactNode;
 
-interface Options {
+export interface Options {
   delay?: number; // default: 1000
 }
 export const createToastStore = (options: Options = {}) => {

@@ -35,18 +35,23 @@ const Component = styled("div")`
   line-height: 1.3;
   will-change: transform;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
-  max-width: 300px;
+  max-width: 400px;
   pointer-events: auto;
   padding: 8px;
   border-radius: 8px;
   margin: 0 auto;
 `;
 
+const Icon = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Message = styled("div")`
   display: flex;
   justify-content: center;
   color: inherit;
-  flex: 1 1 auto;
+  flex: 1;
   white-space: pre-line;
 `;
 
@@ -66,8 +71,14 @@ export const ToastBar: React.FC<{
   const [visible, setVisible] = useState(true);
   const animationStyle: React.CSSProperties = getAnimationStyle(visible);
 
-  const icon = <ToastIcon icon={toast.icon} />;
-  const message = <Message>{toast.message}</Message>;
+  const icon = toast.icon && (
+    <Icon className="ro-toast-icon">
+      <ToastIcon icon={toast.icon} />
+    </Icon>
+  );
+  const message = (
+    <Message className="ro-toast-message">{toast.message}</Message>
+  );
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -81,6 +92,7 @@ export const ToastBar: React.FC<{
 
   return (
     <Component
+      className="ro-toast-bar"
       style={animationStyle}
       onAnimationEnd={() => {
         if (!visible) {
