@@ -7,7 +7,8 @@ const WarningMark = styled("i")`
   display: block;
   width: 20px;
   height: 20px;
-  border: 2px solid #faad14;
+  border: 2px solid currentColor;
+  color: #faad14;
   border-radius: 40px;
 
   &::after,
@@ -20,7 +21,6 @@ const WarningMark = styled("i")`
     width: 2px;
     background: currentColor;
     left: 7px;
-    color: #faad14;
   }
   &::after {
     top: 2px;
@@ -38,7 +38,8 @@ const InfoMark = styled("i")`
   display: block;
   width: 20px;
   height: 20px;
-  border: 2px solid #1677ff;
+  border: 2px solid currentColor;
+  color: #1677ff;
   border-radius: 40px;
 
   &::after,
@@ -51,7 +52,6 @@ const InfoMark = styled("i")`
     width: 2px;
     background: currentColor;
     left: 7px;
-    color: #1677ff;
   }
   &::after {
     bottom: 2px;
@@ -68,7 +68,8 @@ const SuccessMark = styled("i")`
   display: block;
   width: 22px;
   height: 22px;
-  border: 2px solid #52c41a;
+  border: 2px solid currentColor;
+  color: #52c41a;
   border-radius: 100px;
   &::after {
     content: "";
@@ -84,7 +85,6 @@ const SuccessMark = styled("i")`
     border-style: solid;
     transform-origin: bottom left;
     transform: rotate(45deg);
-    color: #52c41a;
   }
 `;
 
@@ -94,7 +94,7 @@ const ErrorMark = styled("i")`
   display: block;
   width: 22px;
   height: 22px;
-  border: 2px solid #ff4d4f;
+  border: 2px solid currentColor;
   color: #ff4d4f;
   border-radius: 40px;
 
@@ -118,17 +118,18 @@ const ErrorMark = styled("i")`
 `;
 
 export const ToastIcon: React.FC<{
+  className?: string;
   icon: ToastIconType;
-}> = ({ icon }) => {
+}> = ({ className, icon }) => {
   switch (icon) {
     case "error":
-      return <ErrorMark />;
+      return <ErrorMark className={className} />;
     case "success":
-      return <SuccessMark />;
+      return <SuccessMark className={className} />;
     case "info":
-      return <InfoMark />;
+      return <InfoMark className={className} />;
     case "warning":
-      return <WarningMark />;
+      return <WarningMark className={className} />;
     default:
       return icon;
   }

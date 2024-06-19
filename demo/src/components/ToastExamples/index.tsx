@@ -15,6 +15,8 @@ import { WarningExample } from "./Warning";
 import { InfoExample } from "./Info";
 import { UseToastExample } from "./UseToast";
 import { CustomExample } from "./Custom";
+import { CustomPositionExample } from "./CustomPosition";
+import { CustomStyleExample } from "./CustomStyle";
 
 const ToastExampleStore = ReactOpener.createStore();
 const examples: { label: string; emoji: string; render(): JSX.Element }[] = [
@@ -22,40 +24,54 @@ const examples: { label: string; emoji: string; render(): JSX.Element }[] = [
     label: "Success",
     emoji: "✅",
     render: () => {
-      return <SuccessExample />;
+      return <SuccessExample key="Success" />;
     },
   },
   {
     label: "Error",
     emoji: "❌",
     render: () => {
-      return <ErrorExample />;
+      return <ErrorExample key="Error" />;
     },
   },
   {
     label: "Warning",
     emoji: "❗",
     render: () => {
-      return <WarningExample />;
+      return <WarningExample key="Warning" />;
     },
   },
   {
     label: "Info",
     emoji: "ℹ️",
     render: () => {
-      return <InfoExample />;
+      return <InfoExample key="Info" />;
     },
   },
   {
     label: "Custom",
+    emoji: "🛠️",
+    render: () => {
+      return <CustomExample key="Custom" />;
+    },
+  },
+  {
+    label: "CustomStyle",
     emoji: "🎨",
     render: () => {
-      return <CustomExample />;
+      return <CustomStyleExample key="CustomStyle" />;
+    },
+  },
+  {
+    label: "CustomPosition",
+    emoji: "🔼",
+    render: () => {
+      return <CustomPositionExample />;
     },
   },
   {
     label: "useToast",
-    emoji: "🎨",
+    emoji: "🪝",
     render: () => {
       return <UseToastExample />;
     },
@@ -74,7 +90,7 @@ export const ToastExamples = () => {
         <Heading size="md" marginBottom={4}>
           ReactToastOpener
         </Heading>
-        <Flex height={200} alignItems="flex-start" gap={12}>
+        <Flex height={250} alignItems="flex-start" gap={12}>
           <Grid
             templateColumns="repeat(2, 1fr)"
             gap={6}

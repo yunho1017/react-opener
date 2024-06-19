@@ -2628,12 +2628,9 @@ react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-opener@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/react-opener/-/react-opener-1.1.4.tgz#107e0f1edb4004af259276cbc816a5b5a7567d10"
-  integrity sha512-LXTCwd8HucEct1FhnQkSepFNJgAqOIvwU/LyzF4y32o7mzNOd740Fq0aVltm+pom365lsS+frthqjsZwvdvSUQ==
-  dependencies:
-    goober "^2.1.14"
+"react-opener@link:..":
+  version "0.0.0"
+  uid ""
 
 react-refresh@^0.14.2:
   version "0.14.2"

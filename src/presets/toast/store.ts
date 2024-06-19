@@ -15,13 +15,22 @@ export type ToastIconType =
   | "warning"
   | React.ReactNode;
 
+export type ToastPositionType =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
+
 export interface Options {
   delay?: number; // default: 1000
+  position?: ToastPositionType;
 }
 export const createToastStore = (options: Options = {}) => {
-  const { delay = 1000 } = options;
+  const { delay = 1000, position = "top-center" } = options;
   const store = createStore<
-    StoreState<Toast, Toast | string> & { delay: number }
+    StoreState<Toast, Toast | string> & Required<Options>
   >((set) => {
     const defaultState = generateDefaultState<Toast, Toast | string>(set);
     return {
@@ -32,6 +41,7 @@ export const createToastStore = (options: Options = {}) => {
         );
       },
       delay,
+      position,
     };
   });
 
