@@ -28,7 +28,7 @@ export const CustomStyleExample = () => {
     <>
       <Code
         code={`
-  const ToastStore = ReactToastOpener.createStore({ delay: 100000 });
+  const ToastStore = ReactToastOpener.createStore();
   const StyledOpener = styled(ReactToastOpener)\`
     .ro-toast-bar {
       border: 1px solid #713200;
