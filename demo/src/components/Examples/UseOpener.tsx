@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ReactOpener } from "react-opener";
-import { Code } from "../code";
+import { StyledCode } from ".";
 import {
   Button,
   Modal,
@@ -47,7 +47,7 @@ export const UseOpenerExample = () => {
 
   return (
     <>
-      <Code
+      <StyledCode
         code={`
   const [api, opener] = ReactOpener.useOpener();
   

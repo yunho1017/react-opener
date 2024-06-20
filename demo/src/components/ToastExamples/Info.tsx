@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ReactToastOpener } from "react-opener";
-import { Code } from "../code";
+
+import { StyledCode } from "../Examples";
 
 export const InfoExample = () => {
   const [toast, opener] = ReactToastOpener.useToast();
@@ -10,7 +11,7 @@ export const InfoExample = () => {
 
   return (
     <>
-      <Code
+      <StyledCode
         code={`
   const ToastStore = ReactToastOpener.createStore();
   

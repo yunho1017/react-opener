@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { ReactToastOpener } from "react-opener";
-import { Code } from "../code";
 import styled from "@emotion/styled";
+import { StyledCode } from "../Examples";
 
 const ToastStore = ReactToastOpener.createStore();
 const StyledOpener = styled(ReactToastOpener)`
@@ -26,7 +26,7 @@ export const CustomStyleExample = () => {
 
   return (
     <>
-      <Code
+      <StyledCode
         code={`
   const ToastStore = ReactToastOpener.createStore();
   const StyledOpener = styled(ReactToastOpener)\`

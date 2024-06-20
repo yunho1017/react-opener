@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { ReactOpener } from "react-opener";
 import { Toast } from "@chakra-ui/react";
-import { Code } from "../code";
+import { StyledCode } from ".";
 
 export const ToastExample = () => {
   const [api, opener] = ReactOpener.useOpener();
@@ -32,7 +32,7 @@ export const ToastExample = () => {
 
   return (
     <>
-      <Code
+      <StyledCode
         code={`
   const Store = ReactOpener.createStore();
   

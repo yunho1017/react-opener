@@ -1,12 +1,18 @@
+import React from "react";
 import { Highlight, themes } from "prism-react-renderer";
 
 export const Code: React.FC<{
+  className?: string;
   code: string;
-}> = (props) => {
+  language?: React.ComponentProps<typeof Highlight>["language"];
+}> = ({ className, code, language = "jsx" }) => {
   return (
-    <Highlight code={props.code} theme={themes.vsDark} language="jsx">
+    <Highlight code={code} theme={themes.vsDark} language={language}>
       {({ style, tokens, getLineProps, getTokenProps }) => (
-        <pre style={{ ...style, height: "100%", overflow: "auto" }}>
+        <pre
+          style={{ ...style, padding: 12, overflow: "auto" }}
+          className={className}
+        >
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({ line })}>
               {line.map((token, key) => (

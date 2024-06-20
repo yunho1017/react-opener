@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ReactToastOpener } from "react-opener";
-import { Code } from "../code";
+import { StyledCode } from "../Examples";
 
 export const WarningExample = () => {
   const [toast, opener] = ReactToastOpener.useToast({ delay: 200000 });
@@ -10,7 +10,7 @@ export const WarningExample = () => {
 
   return (
     <>
-      <Code
+      <StyledCode
         code={`
   const ToastStore = ReactToastOpener.createStore();
           

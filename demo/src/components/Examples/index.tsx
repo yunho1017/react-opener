@@ -12,6 +12,12 @@ import { ReactOpener } from "react-opener";
 import { ModalExample } from "./Modal";
 import { ToastExample } from "./Toast";
 import { UseOpenerExample } from "./UseOpener";
+import styled from "@emotion/styled";
+import { Code } from "../Code";
+
+export const StyledCode = styled(Code)`
+  height: 100%;
+`;
 
 const ExampleStore = ReactOpener.createStore();
 const examples: { label: string; render(): JSX.Element }[] = [

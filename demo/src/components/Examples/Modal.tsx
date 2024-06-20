@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { ReactOpener } from "react-opener";
-import { Code } from "../code";
 import {
   Button,
   Modal,
@@ -11,6 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
+import { StyledCode } from ".";
 
 export const ModalExample = () => {
   const [api, opener] = ReactOpener.useOpener();
@@ -47,7 +47,7 @@ export const ModalExample = () => {
 
   return (
     <>
-      <Code
+      <StyledCode
         code={`
   const Store = ReactOpener.createStore();
   
