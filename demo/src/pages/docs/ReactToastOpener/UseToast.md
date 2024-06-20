@@ -1,4 +1,6 @@
-## ReactToastOpener.useToast
+# ReactToastOpener.useToast
+
+## Usage
 
 ```javascript
 import { ReactToastOpener } from "react-opener";
@@ -21,3 +23,15 @@ const Container = () => {
   );
 };
 ```
+
+## API
+
+#### Options
+
+same as createStore Options
+
+<!-- prettier-ignore -->
+| Field | Description  | Type | Default |
+| --- | --- | --- | --- |
+| delay | When does the toast message disappear | number | 1000 |
+| position | Where does the toast message | ToastPositionType | "top-center" |

@@ -28,8 +28,9 @@ export const createOpenerStore = () => {
 
   return {
     ...store,
-    open: (item: Item | Item["element"]) => {
-      return store.getState().open(item);
-    },
+
+    open: store.getState().open,
+    close: store.getState().close,
+    closeAll: store.getState().closeAll,
   };
 };

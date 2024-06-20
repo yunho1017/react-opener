@@ -170,7 +170,7 @@ export const DocsLayout: React.FC = () => {
           maxWidth={"1200px"}
           margin="0 auto"
           mt={{ base: 0, md: "24px" }}
-          gap="12px"
+          gap="24px"
         >
           <Outlet />
         </Flex>
