@@ -85,14 +85,23 @@ export const ToastExamples = () => {
   };
 
   return (
-    <Card width={"100%"} maxWidth={1000}>
+    <Card
+      width={"100%"}
+      maxWidth={1000}
+      borderRadius={{ base: 0, md: "var(--chakra-radii-md)" }}
+    >
       <CardBody>
         <Heading size="md" marginBottom={4}>
           ReactToastOpener
         </Heading>
-        <Flex height={250} alignItems="flex-start" gap={12}>
+        <Flex
+          height={{ md: 250 }}
+          gap={12}
+          direction={{ base: "column", md: "row" }}
+        >
           <Grid
-            templateColumns="repeat(2, 1fr)"
+            width={"100%"}
+            templateColumns={{ md: "repeat(2, 1fr)" }}
             gap={6}
             flex={1}
             height="fit-content"
@@ -110,7 +119,7 @@ export const ToastExamples = () => {
               </GridItem>
             ))}
           </Grid>
-          <Box flex={1} overflow={"auto"} height={"100%"}>
+          <Box width={"100%"} flex={1} overflow={"auto"} height={"100%"}>
             <ReactOpener store={ToastExampleStore} />
           </Box>
         </Flex>

@@ -51,13 +51,22 @@ export const Examples = () => {
   };
 
   return (
-    <Card width={"100%"} maxWidth={1000}>
+    <Card
+      width={"100%"}
+      maxWidth={1000}
+      borderRadius={{ base: 0, md: "var(--chakra-radii-md)" }}
+    >
       <CardBody>
         <Heading size="md" marginBottom={4}>
           ReactOpener
         </Heading>
-        <Flex height={200} alignItems="flex-start" gap={12}>
-          <Grid templateColumns="1fr" gap={6} flex={1} height="fit-content">
+        <Flex
+          height={{ md: 200 }}
+          alignItems="flex-start"
+          gap={12}
+          direction={{ base: "column", md: "row" }}
+        >
+          <Grid gap={6} flex={1} height="fit-content" width={"100%"}>
             {examples.map((example) => (
               <GridItem>
                 <Button
@@ -71,7 +80,7 @@ export const Examples = () => {
               </GridItem>
             ))}
           </Grid>
-          <Box flex={1} overflow={"auto"} height={"100%"}>
+          <Box flex={1} overflow={"auto"} height={"100%"} width={"100%"}>
             <ReactOpener store={ExampleStore} />
           </Box>
         </Flex>
