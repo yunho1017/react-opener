@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "use-sync-external-store";
 import { css } from "goober";
 
 import { ToastBar } from "./components/ToastBar";

@@ -1,4 +1,5 @@
-import React, { useSyncExternalStore } from "react";
+import { Fragment } from "react";
+import { useSyncExternalStore } from "use-sync-external-store";
 
 import { createOpenerStore } from "./store";
 
@@ -16,14 +17,14 @@ export const ReactOpener = ({
   return (
     <>
       {items.map((item) => (
-        <React.Fragment key={item.id}>
+        <Fragment key={item.id}>
           {typeof item.element === "function"
             ? item.element({
                 id: item.id,
                 close: () => close(item.id),
               })
             : item.element}
-        </React.Fragment>
+        </Fragment>
       ))}
     </>
   );
