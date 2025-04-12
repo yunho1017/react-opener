@@ -11,8 +11,11 @@ export function useOpener() {
   return [
     {
       open: ref.current.getState().open,
+      openAsync: ref.current.getState().openAsync,
       close: ref.current.getState().close,
       closeAll: ref.current.getState().closeAll,
+      unmount: ref.current.getState().unmount,
+      unmountAll: ref.current.getState().unmountAll,
     },
     <ReactOpener store={ref.current} />,
   ] as const;

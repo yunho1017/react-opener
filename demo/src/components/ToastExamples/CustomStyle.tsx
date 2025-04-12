@@ -20,7 +20,7 @@ const StyledOpener = styled(ReactToastOpener)`
 
 export const CustomStyleExample = () => {
   useEffect(() => {
-    ToastStore.getState().closeAll();
+    ToastStore.getState().unmountAll();
     ToastStore.success("Success: Request processed!");
   }, []);
 

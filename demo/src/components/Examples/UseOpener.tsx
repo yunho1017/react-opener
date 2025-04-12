@@ -15,8 +15,8 @@ import {
 export const UseOpenerExample = () => {
   const [api, opener] = ReactOpener.useOpener();
   useEffect(() => {
-    api.open(({ close }) => (
-      <Modal isOpen={true} onClose={close}>
+    api.open(({ unmount }) => (
+      <Modal isOpen={true} onClose={unmount}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
@@ -35,7 +35,7 @@ export const UseOpenerExample = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={close}>
+            <Button colorScheme="blue" mr={3} onClick={unmount}>
               Close
             </Button>
             <Button variant="ghost">Secondary Action</Button>

@@ -1,7 +1,6 @@
+import React, { useEffect } from "react";
 import { useSyncExternalStore } from "use-sync-external-store";
 import { css } from "goober";
-
-import { ToastBar } from "./components/ToastBar";
 
 import type { Options, ToastPositionType, createToastStore } from "./store";
 
@@ -38,7 +37,8 @@ export const ReactToastOpener = ({
   const {
     items,
     close,
-    delay,
+    unmount,
+    unmountAll,
     position: _position,
   } = useSyncExternalStore(
     store.subscribe,
@@ -48,16 +48,24 @@ export const ReactToastOpener = ({
 
   const position = options?.position ?? _position;
 
+  useEffect(() => {
+    return () => {
+      unmountAll();
+    };
+  }, []);
+
   return (
     <div style={style} className={`${getStyle(position)} ${className ?? ""}`}>
       {items.map((item) => (
-        <ToastBar
-          key={item.id}
-          toast={item}
-          close={close}
-          position={position}
-          delay={item.delay ?? options?.delay ?? delay}
-        />
+        <React.Fragment key={item.id}>
+          {typeof item.element === "function"
+            ? item.element({
+                ...item,
+                close: () => close(item.id),
+                unmount: () => unmount(item.id),
+              })
+            : item.element}
+        </React.Fragment>
       ))}
     </div>
   );

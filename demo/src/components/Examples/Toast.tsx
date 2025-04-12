@@ -6,7 +6,7 @@ import { StyledCode } from ".";
 export const ToastExample = () => {
   const [api, opener] = ReactOpener.useOpener();
   useEffect(() => {
-    const { id } = api.open(
+    const { id } = api.open(() => (
       <div
         style={{
           position: "fixed",
@@ -24,7 +24,7 @@ export const ToastExample = () => {
       >
         <Toast description={"Success: Request processed!"} duration={1000} />
       </div>
-    );
+    ));
     setTimeout(() => {
       api.close(id);
     }, 1000);

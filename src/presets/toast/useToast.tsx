@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Options, Toast, createToastStore } from "./store";
+import { Options, createToastStore } from "./store";
 import { ReactToastOpener } from "./Renderer";
 
 export function useToast(options: Options = {}) {
@@ -12,25 +12,11 @@ export function useToast(options: Options = {}) {
     {
       close: ref.current.getState().close,
       closeAll: ref.current.getState().closeAll,
-      custom: (item: Toast | string) => {
-        ref.current?.getState().open(item);
-      },
-      success: (item: Omit<Toast, "icon"> | string) => {
-        const _item = typeof item === "string" ? { message: item } : item;
-        ref.current?.getState().open({ ..._item, icon: "success" });
-      },
-      error: (item: Omit<Toast, "icon"> | string) => {
-        const _item = typeof item === "string" ? { message: item } : item;
-        ref.current?.getState().open({ ..._item, icon: "error" });
-      },
-      info: (item: Omit<Toast, "icon"> | string) => {
-        const _item = typeof item === "string" ? { message: item } : item;
-        ref.current?.getState().open({ ..._item, icon: "info" });
-      },
-      warn: (item: Omit<Toast, "icon"> | string) => {
-        const _item = typeof item === "string" ? { message: item } : item;
-        ref.current?.getState().open({ ..._item, icon: "warning" });
-      },
+      custom: ref.current.custom,
+      success: ref.current.success,
+      error: ref.current.error,
+      info: ref.current.info,
+      warn: ref.current.warn,
     },
     <ReactToastOpener store={ref.current} />,
   ] as const;

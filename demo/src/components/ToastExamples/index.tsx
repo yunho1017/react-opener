@@ -80,8 +80,10 @@ const examples: { label: string; emoji: string; render(): JSX.Element }[] = [
 
 export const ToastExamples = () => {
   const handleClick = (component: JSX.Element) => {
-    ToastExampleStore.getState().closeAll();
-    ToastExampleStore.open({ element: component });
+    ToastExampleStore.getState().unmountAll();
+    ToastExampleStore.open(() => {
+      return component;
+    });
   };
 
   return (

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useSyncExternalStore } from "use-sync-external-store";
 
 import { createOpenerStore } from "./store";
@@ -8,11 +8,17 @@ export const ReactOpener = ({
 }: {
   store: ReturnType<typeof createOpenerStore>;
 }) => {
-  const { items, close } = useSyncExternalStore(
+  const { items, close, unmount, unmountAll } = useSyncExternalStore(
     store.subscribe,
     store.getState,
     store.getInitialState
   );
+
+  useEffect(() => {
+    return () => {
+      unmountAll();
+    };
+  }, []);
 
   return (
     <>
@@ -20,8 +26,9 @@ export const ReactOpener = ({
         <Fragment key={item.id}>
           {typeof item.element === "function"
             ? item.element({
-                id: item.id,
+                ...item,
                 close: () => close(item.id),
+                unmount: () => unmount(item.id),
               })
             : item.element}
         </Fragment>

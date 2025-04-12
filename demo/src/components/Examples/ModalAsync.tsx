@@ -12,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { StyledCode } from ".";
 
-export const ModalExample = () => {
+export const ModalAsyncExample = () => {
   const [api, opener] = ReactOpener.useOpener();
   useEffect(() => {
-    api.open({
-      element: ({ unmount }) => (
-        <Modal isOpen={true} onClose={unmount}>
+    const open = async () => {
+      const result = await api.openAsync<boolean>(({ isOpen, unmount }) => (
+        <Modal isOpen={isOpen} onClose={() => unmount(false)}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Modal Title</ModalHeader>
@@ -36,15 +36,20 @@ export const ModalExample = () => {
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={unmount}>
+              <Button colorScheme="blue" mr={3} onClick={() => unmount(false)}>
                 Close
               </Button>
-              <Button variant="ghost">Secondary Action</Button>
+              <Button variant="ghost" onClick={() => unmount(true)}>
+                Confirm
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
-      ),
-    });
+      ));
+
+      alert(result);
+    };
+    open();
   }, []);
 
   return (
@@ -53,7 +58,7 @@ export const ModalExample = () => {
         code={`
   const Store = ReactOpener.createStore();
   
-  Store.open(({isOpen, close})=> <YourDialog isOpen={isOpen} onClose={close}/>);`}
+  const result = Store.openAsync(({isOpen,close})=> <YourDialog isOpen={isOpen} onClose={() =>{close(false)}}/>);`}
       />
       {opener}
     </>

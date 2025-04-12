@@ -14,6 +14,7 @@ import { ToastExample } from "./Toast";
 import { UseOpenerExample } from "./UseOpener";
 import styled from "@emotion/styled";
 import { Code } from "../Code";
+import { ModalAsyncExample } from "./ModalAsync";
 
 export const StyledCode = styled(Code)`
   height: 100%;
@@ -26,6 +27,13 @@ const examples: { label: string; render(): JSX.Element }[] = [
 
     render: () => {
       return <ModalExample />;
+    },
+  },
+  {
+    label: "Modal Async",
+
+    render: () => {
+      return <ModalAsyncExample />;
     },
   },
   {
@@ -47,7 +55,9 @@ const examples: { label: string; render(): JSX.Element }[] = [
 export const Examples = () => {
   const handleClick = (component: JSX.Element) => {
     ExampleStore.getState().closeAll();
-    ExampleStore.open({ element: component });
+    ExampleStore.open(() => {
+      return component;
+    });
   };
 
   return (
@@ -61,7 +71,7 @@ export const Examples = () => {
           ReactOpener
         </Heading>
         <Flex
-          height={{ md: 200 }}
+          height={{ md: 250 }}
           alignItems="flex-start"
           gap={12}
           direction={{ base: "column", md: "row" }}

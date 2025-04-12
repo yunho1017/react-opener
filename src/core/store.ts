@@ -1,13 +1,16 @@
-interface StoreApi<T> {
-  setState: (partial: T | Partial<T> | ((state: T) => T | Partial<T>)) => void;
-  getState: () => T;
-  subscribe: (listener: (state: T, prevState: T) => void) => () => void;
-  getInitialState: () => T;
-}
+import { generateDefaultState } from "./util";
+import type { StoreState, StoreApi } from "./types";
 
-export function createStore<State extends Record<string, any>>(
-  createState: (setState: StoreApi<State>["setState"]) => State
+export function createStore<
+  ItemState extends Record<string, any> = {},
+  AdditionalState extends Record<string, any> = {}
+>(
+  createState?: (
+    setState: StoreApi<StoreState<ItemState> & AdditionalState>["setState"],
+    defaultState: StoreState<ItemState>
+  ) => StoreState<ItemState> & AdditionalState
 ) {
+  type State = StoreState<ItemState> & AdditionalState;
   type Listener = (state: State, prevState: State) => void;
   let state: State;
   const listeners: Set<Listener> = new Set();
@@ -29,6 +32,7 @@ export function createStore<State extends Record<string, any>>(
     listeners.add(listener);
     return () => listeners.delete(listener);
   };
+
   const getInitialState: StoreApi<State>["getInitialState"] = () =>
     initialState;
 
@@ -39,7 +43,12 @@ export function createStore<State extends Record<string, any>>(
     getInitialState,
   };
 
-  const initialState = (state = createState(setState));
+  const defaultState = generateDefaultState(
+    setState as StoreApi<StoreState<ItemState>>["setState"]
+  ) as State;
+  const initialState = (state = createState
+    ? createState(setState, defaultState)
+    : defaultState);
 
   return api;
 }

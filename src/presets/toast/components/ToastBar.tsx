@@ -63,15 +63,16 @@ const getAnimationStyle = (
 };
 
 export const ToastBar: React.FC<{
+  isOpen: boolean;
   toast: Toast & { id: string };
   delay: number;
   position: ToastPositionType;
   close: (id: string) => void;
-}> = memo(({ toast, position, delay, close }) => {
-  const [visible, setVisible] = useState(true);
+  unmount: (id: string) => void;
+}> = memo(({ isOpen, toast, position, delay, close, unmount }) => {
   const animationStyle: React.CSSProperties = getAnimationStyle(
     position,
-    visible
+    isOpen
   );
 
   const icon = toast.icon && (
@@ -83,7 +84,7 @@ export const ToastBar: React.FC<{
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setVisible(false);
+      close(toast.id);
     }, delay);
 
     return () => {
@@ -96,8 +97,8 @@ export const ToastBar: React.FC<{
       className="ro-toast-bar"
       style={animationStyle}
       onAnimationEnd={() => {
-        if (!visible) {
-          close(toast.id);
+        if (!isOpen) {
+          unmount(toast.id);
         }
       }}
     >
